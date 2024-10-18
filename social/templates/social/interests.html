@@ -1,0 +1,194 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Interests</title>
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(88, 132, 168);
+        color: white;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .artist-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Three columns */
+        gap: 20px;
+        width: 100%;
+        max-width: 900px;
+        padding: 10px;
+    }
+
+    /* Place the last card to occupy all columns in the last row */
+    .artist-card:nth-child(7) {
+        grid-column: 1 / -1; /* Span across all columns */
+    }
+
+    .artist-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .artist-card:hover {
+        background-color: rgb(197, 195, 195);
+        color: black;
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .artist-card.selected {
+        border: 2px solid rgb(44, 36, 27);
+        background-color: rgb(146, 185, 230);
+    }
+
+    .artist-image {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        transition: transform 0.3s;
+        border: 2px solid black;
+    }
+
+    .artist-card.selected .artist-image {
+        transform: scale(1.1);
+    }
+
+    .artist-card p {
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: 500;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 10px; /* Reduced margin to bring the button closer */
+    }
+
+    .button {
+        background-color: #1db954;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 0; /* Removed margin from the button */
+        font-size: 1em;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .button:hover {
+        background-color: rgb(197, 195, 195);
+        transform: scale(1.05);
+    }
+
+    .done-button {
+        background-color: black;
+        border: 1px solid white;
+    }
+
+    .done-button:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+    }
+
+    /* Responsive Layout for smaller screens */
+    @media (max-width: 800px) {
+        .artist-container {
+            grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+        }
+    }
+
+    @media (max-width: 600px) {
+        .artist-container {
+            grid-template-columns: 1fr; /* One column for small screens */
+            width: 60%;
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        Choose Your Interests
+    </header>
+    <form method="POST">
+        {% csrf_token %}
+        <main class="artist-container">
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image5.avif' %}" alt="Art" class="artist-image">
+                <p>Art</p>
+                <input type="hidden" name="interests[]" value="Art" disabled>
+            </div>
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image1.avif' %}" alt="Music" class="artist-image">
+                <p>Music</p>
+                <input type="hidden" name="interests[]" value="Music" disabled>
+            </div>
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image5.avif' %}" alt="Dance" class="artist-image">
+                <p>Dance</p>
+                <input type="hidden" name="interests[]" value="Dance" disabled>
+            </div>
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image1.avif' %}" alt="Photography" class="artist-image">
+                <p>Photography</p>
+                <input type="hidden" name="interests[]" value="Photography" disabled>
+            </div>
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image1.avif' %}" alt="Crafts and DIY" class="artist-image">
+                <p>Crafts and DIY</p>
+                <input type="hidden" name="interests[]" value="Crafts and DIY" disabled>
+            </div>
+            <div class="artist-card" onclick="toggleSelection(this)">
+                <img src="{% static 'images/image1.avif' %}" alt="Poetry" class="artist-image">
+                <p>Poetry</p>
+                <input type="hidden" name="interests[]" value="Poetry" disabled>
+            </div>
+        </main>
+        <footer>
+            <button type="submit" class="button done-button">Done</button>
+        </footer>
+    </form>
+    
+    <script>
+        function toggleSelection(card) {
+            const input = card.querySelector('input');
+            if (card.classList.toggle('selected')) {
+                input.disabled = false;  // Enable input when selected
+            } else {
+                input.disabled = true;  // Disable input when deselected
+            }
+        }
+    </script>
+</body>
+</html>
