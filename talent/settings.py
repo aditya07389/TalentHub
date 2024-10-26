@@ -129,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL='login'
+LOGIN_URL='user_login'
 LOGOUT_URL='logout'
 
 # Default primary key field type

@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forgot Password</title>
+  <title>TalentHub - Forgot Password</title>
   <style>
+    :root {
+      font-size: 16px;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f4ec;
       margin: 0;
       padding: 0;
       display: flex;
@@ -18,86 +22,119 @@
 
     .container {
       background-color: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-      width: 320px;
+      padding: 2.5rem 2rem;
+      margin: 2.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 25rem;
       text-align: center;
+      color: #5c4033;
     }
 
     h2 {
-      margin-bottom: 20px;
-      font-size: 20px;
+      margin-bottom: 0.625rem;
+      font-size: 1.375rem;
+      color: #8b5e3c;
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: 0.875rem;
+      color: #7a6e5a;
+      margin-bottom: 1.25rem;
     }
 
     .input-field {
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
       text-align: left;
+      margin: 0 auto;
     }
 
     .input-field label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 0.3125rem;
       font-weight: bold;
-      font-size: 14px;
-      color: #333;
+      font-size: 0.875rem;
+      color: #5c4033;
     }
 
     .input-field input {
       width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
-      background-color: #fafafa;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 0.0625rem solid #e0c8a4;
+      border-radius: 0.3125rem;
+      background-color: #faf9f5;
       transition: border-color 0.2s;
     }
 
     .input-field input:focus {
       outline: none;
-      border-color: #b4b4b4;
+      border-color: #b79b70;
     }
 
     .btn-container {
       text-align: center;
+      margin-top: 0.9375rem;
     }
 
     .btn {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #3897f0;
+      padding: 0.625rem 1.5rem;
+      font-size: 1rem;
+      background-color: #8b5e3c;
       color: #fff;
       border: none;
-      border-radius: 3px;
+      border-radius: 0.25rem;
       cursor: pointer;
       transition: background-color 0.2s;
     }
 
     .btn:hover {
-      background-color: #2680d6;
+      background-color: #73492e;
     }
 
     .btn-back {
       display: block;
-      margin-top: 20px;
-      color: #262626;
-      font-size: 14px;
+      margin-top: 1.25rem;
+      color: #7a6e5a;
+      font-size: 0.875rem;
       text-decoration: none;
     }
 
     .btn-back:hover {
       text-decoration: underline;
     }
+
+    /* Responsive Styling */
+    @media (max-width: 48rem) {
+      .container {
+        width: 85%;
+        padding: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .description {
+        font-size: 0.8125rem;
+      }
+    }
   </style>
 </head>
 <body>
+  
   <div class="container">
     <h2>Forgot Password</h2>
-    <form id="forgot-password-form" method="POST" action="/reset">
+    <p class="description">
+      Enter your email to receive a reset link. Please check your inbox for instructions on creating a new password.
+    </p>
+    <form id="forgot-password-form" method="POST">
       {% csrf_token %}
       <div class="input-field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
       </div>
       <div class="btn-container">
         <button type="submit" class="btn">Send Reset Link</button>
@@ -107,4 +144,3 @@
   </div>
 </body>
 </html>
-

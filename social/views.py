@@ -130,3 +130,9 @@ def logout(request):
     auth_logout(request)  # Logs out the user
     return redirect('user_login')
 
+# def reset(request):
+#     return render(request, 'social/reset.html')
+
+# def password_reset_confirm(request):
+#     return render(request, 'social/password_reset.html')
+
